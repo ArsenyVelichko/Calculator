@@ -1,0 +1,16 @@
+/.vs
+
+/x64
+Calculator/x64
+sin/x64
+
+*.vcxproj.user
+*.vcxproj.filters
+
+*.iobj
+*.ipdb
+*.lib
+*.dll
+*.exp
+*.pdb
+*.ilk
