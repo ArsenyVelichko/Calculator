@@ -4,9 +4,9 @@ BinaryOperation::BinaryOperation(const BinaryDef& def)
   : Expression(def) {}
 
 void BinaryOperation::pushArg(const Expression* expr) {
-  if (mCurrArgIndex < 2) {
+  if (mCurrArgIndex >= 0) {
     mArgs[mCurrArgIndex] = expr;
-    mCurrArgIndex++;
+    mCurrArgIndex--;
 
   } else {
     throw "Too many arguments";

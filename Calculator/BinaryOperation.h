@@ -20,7 +20,7 @@ protected:
   const Expression* mArgs[2] = {0};
 
 private:
-  int mCurrArgIndex = 0;
+  int mCurrArgIndex = 1;
 };
 
 struct AdditionDef : BinaryDef {

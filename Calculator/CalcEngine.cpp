@@ -12,7 +12,7 @@ void CalcEngine::shiftExpr() {
   }
 
   for (size_t i = 0; i < topExpr->mArgNumber; i++) {
-    topExpr->pushArg(mOutputStk.front());
+    topExpr->pushArg(mOutputStk.top());
     mOutputStk.pop();
   }
 
@@ -72,7 +72,7 @@ Expression* CalcEngine::popOutputExpr() {
     throw "Incomplete expression";
   }
 
-  Expression* outputExpr = mOutputStk.front();
+  Expression* outputExpr = mOutputStk.top();
   mOutputStk.pop();
   return outputExpr;
 }

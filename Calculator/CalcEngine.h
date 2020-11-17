@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stack>
-#include <queue>
 #include "Expression.h"
 
 using namespace std;
@@ -9,7 +8,7 @@ using namespace std;
 class CalcEngine {
 private:
   stack<Expression*> mProcessStk;
-  queue<Expression*> mOutputStk;
+  stack<Expression*> mOutputStk;
 
   void shiftExpr();
 

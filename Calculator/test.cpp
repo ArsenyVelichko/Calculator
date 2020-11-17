@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+
 #include "ExpressionParser.h"
 
 using namespace std;
@@ -8,7 +9,10 @@ int main()
   try {
     ExpressionFactory* factory = ExpressionFactory::createFromDll("../plugins");
     ExpressionParser parser(factory);
-    Expression* expr = parser.parse("sin ( 2 / 4 )", " ");
+
+    char buf[256];
+    cin.getline(buf, 256);
+    Expression* expr = parser.parse(buf, " ");
     cout << expr->evaluate() << endl;
     delete expr;
 
