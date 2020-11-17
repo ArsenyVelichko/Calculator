@@ -8,7 +8,7 @@ int main()
   try {
     ExpressionFactory* factory = ExpressionFactory::createFromDll("../plugins");
     ExpressionParser parser(factory);
-    Expression* expr = parser.parse("2 + 2 * sin ( 2 )", " ");
+    Expression* expr = parser.parse("sin ( 2 / 4 )", " ");
     cout << expr->evaluate() << endl;
     delete expr;
 
