@@ -15,4 +15,5 @@ private:
   const ExpressionFactory* mFactory;
 
   vector<string> split(const string& str, const string& delimiter) const;
+  Expression* parseTokens(const vector<string>& tokens) const;
 };

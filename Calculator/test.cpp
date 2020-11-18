@@ -2,24 +2,24 @@
 
 #include "ExpressionParser.h"
 
+constexpr size_t buffSize = 256;
+
 using namespace std;
 
 int main()
 {
-  try {
-    ExpressionFactory* factory = ExpressionFactory::createFromDll("plugins");
-    ExpressionParser parser(factory);
+  ExpressionFactory* factory = ExpressionFactory::createFromDll("plugins");
+  ExpressionParser parser(factory);
 
-    char buf[256];
-    cin.getline(buf, 256);
-    Expression* expr = parser.parse(buf, " ");
+  char buf[buffSize];
+  cin.getline(buf, buffSize);
+  Expression* expr = parser.parse(buf, " ");
+  if (expr) {
     cout << expr->evaluate() << endl;
-    system("pause");
-    delete expr;
-
-  } catch (const char* e) {
-    cout << e << endl;
   }
+
+  system("pause");
+  delete expr;
 
   return 0;
 }

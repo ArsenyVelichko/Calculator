@@ -7,7 +7,7 @@
 
 struct SinusDef : ExpressionDef {
   SinusDef() {
-    precedence = NUM_PRECEDENCE + 1;
+    precedence = MUL_PRECEDENCE + 2;
     argNumber = 1;
     prefix = true;
   }

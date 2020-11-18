@@ -3,7 +3,8 @@
 #include "CalcEngine.h"
 
 ExpressionParser::ExpressionParser(const ExpressionFactory* factory)
-  : mFactory(factory) {}
+  : mFactory(factory) {
+}
 
 ExpressionParser::~ExpressionParser() {
   delete mFactory;
@@ -22,31 +23,40 @@ vector<string> ExpressionParser::split(const string& str, const string& delimite
   return substrings;
 }
 
+Expression* ExpressionParser::parseTokens(const vector<string>& tokens) const {
+  CalcEngine engine;
+
+  for (auto token : tokens) {
+
+    if (token == "(") {
+      engine.openSubExpr();
+
+    } else if (token == ")") {
+      engine.closeSubExpr();
+
+    } else {
+      Expression* newExpr = mFactory->getExpression(token);
+      if (!newExpr) {
+        cout << "Undefined expression" << endl;
+        return nullptr;
+      }
+
+      engine.pushExpr(newExpr);
+    }
+  }
+  return engine.popOutputExpr();
+}
+
+
 Expression* ExpressionParser::parse(const string& str, const string& delimiter) const {
   vector<string> tokens = split(str, delimiter);
 
-  CalcEngine engine;
-  for (auto token : tokens) {
+  try {
+    return parseTokens(tokens);
 
-    try {
-      if (token == "(") {
-        engine.openSubExpr();
-
-      } else if (token == ")") {
-        engine.closeSubExpr();
-
-      } else {
-        Expression* newExpr = mFactory->getExpression(token);
-        if (!newExpr) { return nullptr; }
-
-        engine.pushExpr(newExpr);
-      }
-
-    } catch (const char* msg) {
-      cout << msg << endl;
-      return nullptr;
-    }
+  } catch (const char* msg) {
+    cout << msg << endl;
+    return nullptr;
   }
 
-  return engine.popOutputExpr();
 }
