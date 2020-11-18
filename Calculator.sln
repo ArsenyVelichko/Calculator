@@ -5,10 +5,13 @@ VisualStudioVersion = 15.0.28307.1259
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Calculator", "Calculator\Calculator.vcxproj", "{3AE4831D-305F-4E79-A812-C3AC3D1A9FBE}"
 	ProjectSection(ProjectDependencies) = postProject
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9} = {9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}
 		{ECDEC2E5-09EC-4FC8-B3F0-6DB2153C6022} = {ECDEC2E5-09EC-4FC8-B3F0-6DB2153C6022}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sin", "sin\sin.vcxproj", "{ECDEC2E5-09EC-4FC8-B3F0-6DB2153C6022}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pow", "pow\pow.vcxproj", "{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +37,14 @@ Global
 		{ECDEC2E5-09EC-4FC8-B3F0-6DB2153C6022}.Release|x64.Build.0 = Release|x64
 		{ECDEC2E5-09EC-4FC8-B3F0-6DB2153C6022}.Release|x86.ActiveCfg = Release|Win32
 		{ECDEC2E5-09EC-4FC8-B3F0-6DB2153C6022}.Release|x86.Build.0 = Release|Win32
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Debug|x64.ActiveCfg = Debug|x64
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Debug|x64.Build.0 = Debug|x64
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Debug|x86.ActiveCfg = Debug|Win32
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Debug|x86.Build.0 = Debug|Win32
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Release|x64.ActiveCfg = Release|x64
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Release|x64.Build.0 = Release|x64
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Release|x86.ActiveCfg = Release|Win32
+		{9D9A9697-EEB3-4E1C-AADE-1132EF8C7FB9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

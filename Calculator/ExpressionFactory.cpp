@@ -4,7 +4,7 @@
 #include "BinaryOperation.h"
 #include "Number.h"
 
-using infoFunc = void (*)(ExpressionInfo*);
+using infoFunc = void (*)(ExpressionInfo&);
 
 ExpressionFactory::ExpressionFactory() {
   registerExpr("+", new Addition);
@@ -57,7 +57,7 @@ ExpressionFactory* ExpressionFactory::createFromDll(const string& directory) {
     if (!getInfo) { continue; }
 
     ExpressionInfo info;
-    getInfo(&info);
+    getInfo(info);
     factory->registerExpr(info);
   }
 

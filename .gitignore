@@ -3,6 +3,7 @@
 /x64
 Calculator/x64
 sin/x64
+pow/x64
 
 *.vcxproj.user
 *.vcxproj.filters
