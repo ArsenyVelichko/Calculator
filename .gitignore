@@ -5,9 +5,6 @@ Calculator/x64
 sin/x64
 pow/x64
 
-*.vcxproj.user
-*.vcxproj.filters
-
 *.iobj
 *.ipdb
 *.lib
