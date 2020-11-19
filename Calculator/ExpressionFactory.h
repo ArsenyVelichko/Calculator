@@ -1,5 +1,7 @@
 #pragma once
 
+#include <windows.h>
+#include <vector>
 #include <map>
 #include <string>
 #include "Expression.h"
@@ -18,10 +20,11 @@ public:
 
   Expression* getExpression(const string& grammarToken) const;
   void registerExpr(const string& grammarToken, const Expression* prototype);
-  void registerExpr(const ExpressionInfo& info);
+  void registerExpr(const wchar_t* dllName);
 
   static ExpressionFactory* createFromDll(const string& directory);
 
 private:
   map<const string, const Expression*> mRegister;
+  vector<HMODULE> mAdditionalDll;
 };

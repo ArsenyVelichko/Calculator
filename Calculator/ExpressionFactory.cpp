@@ -1,5 +1,4 @@
 #include <filesystem>
-#include <windows.h>
 #include "ExpressionFactory.h"
 #include "BinaryOperation.h"
 #include "Number.h"
@@ -14,8 +13,12 @@ ExpressionFactory::ExpressionFactory() {
 }
 
 ExpressionFactory::~ExpressionFactory() {
-  for (auto elem : mRegister) {
+  for (auto& elem : mRegister) {
     delete elem.second;
+  }
+
+  for (auto& dllHandler : mAdditionalDll) {
+    FreeLibrary(dllHandler);
   }
 }
 
@@ -40,8 +43,18 @@ void ExpressionFactory::registerExpr(const string& grammarToken, const Expressio
   mRegister[grammarToken] = prototype;
 }
 
-void ExpressionFactory::registerExpr(const ExpressionInfo& info) {
+void ExpressionFactory::registerExpr(const wchar_t* dllName) {
+  HINSTANCE hDll = LoadLibrary(dllName);
+  if (!hDll) { return; }
+
+  infoFunc getInfo = (infoFunc)GetProcAddress(hDll, "getExpressionInfo");
+  if (!getInfo) { return; }
+
+  ExpressionInfo info;
+  getInfo(info);
   registerExpr(info.name, info.prototype);
+
+  mAdditionalDll.push_back(hDll);
 }
 
 ExpressionFactory* ExpressionFactory::createFromDll(const string& directory) {
@@ -50,16 +63,7 @@ ExpressionFactory* ExpressionFactory::createFromDll(const string& directory) {
   for (auto& p : filesystem::directory_iterator(directory)) {
     if (p.path().extension() != ".dll") { continue; }
 
-    HINSTANCE hDll = LoadLibrary(p.path().c_str());
-    if (!hDll) { continue; }
-
-    infoFunc getInfo = (infoFunc)GetProcAddress(hDll, "getExpressionInfo");
-    if (!getInfo) { continue; }
-
-    ExpressionInfo info;
-    getInfo(info);
-    factory->registerExpr(info);
+    factory->registerExpr(p.path().c_str());
   }
-
   return factory;
 }
