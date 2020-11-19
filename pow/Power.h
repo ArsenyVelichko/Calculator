@@ -15,6 +15,7 @@ struct PowerDef : ExpressionDef {
 class Power : public Expression {
 public:
   Power();
+  ~Power();
 
   double evaluate() const override;
   void pushArg(const Expression* expr) override;

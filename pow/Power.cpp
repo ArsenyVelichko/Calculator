@@ -2,6 +2,11 @@
 
 Power::Power() : Expression(PowerDef()) {}
 
+Power::~Power() {
+  delete mArgs[0];
+  delete mArgs[1];
+}
+
 double Power::evaluate() const {
   return pow(mArgs[0]->evaluate(), mArgs[1]->evaluate());
 }

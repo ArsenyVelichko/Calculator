@@ -14,6 +14,7 @@ private:
 
 public:
   CalcEngine();
+  ~CalcEngine();
 
   void pushExpr(Expression* expr);
   void openSubExpr();

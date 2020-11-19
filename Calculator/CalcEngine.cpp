@@ -5,6 +5,18 @@ CalcEngine::CalcEngine() {
   openSubExpr();
 }
 
+CalcEngine::~CalcEngine() {
+  while (!mOutputStk.empty()) {
+    delete mOutputStk.top();
+    mOutputStk.pop();
+  }
+
+  while (!mProcessStk.empty()) {
+    delete mProcessStk.top();
+    mProcessStk.pop();
+  }
+}
+
 void CalcEngine::shiftExpr() {
   Expression* topExpr = mProcessStk.top();
   if (topExpr->mArgNumber > mOutputStk.size()) {
@@ -24,7 +36,7 @@ void CalcEngine::pushExpr(Expression* expr) {
   _ASSERT_EXPR(expr, L"Null pointer");
 
   if (mProcessStk.empty()) {
-    throw "Missing parentheses";
+    throw "Missing opening parentheses";
   }
 
   if (expr->mPrecendence == NUM_PRECEDENCE) {
@@ -57,7 +69,7 @@ void CalcEngine::openSubExpr() {
 
 void CalcEngine::closeSubExpr() {
   if (mProcessStk.empty()) {
-    throw "Missing parentheses";
+    throw "Missing opening parentheses";
   }
 
   while (mProcessStk.top()) {
@@ -70,6 +82,10 @@ Expression* CalcEngine::popOutputExpr() {
   closeSubExpr();
   if (mOutputStk.size() != 1) {
     throw "Incomplete expression";
+  }
+
+  if (mProcessStk.size()) {
+    throw "Missing closing parentheses";
   }
 
   Expression* outputExpr = mOutputStk.top();

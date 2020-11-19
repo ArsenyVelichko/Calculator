@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-
 #include "ExpressionParser.h"
 
 constexpr size_t buffSize = 256;
@@ -11,15 +10,20 @@ int main()
   ExpressionFactory* factory = ExpressionFactory::createFromDll("plugins");
   ExpressionParser parser(factory);
 
+  cout << "Please, write spaces between tokens." << endl;
+
   char buf[buffSize];
   cin.getline(buf, buffSize);
-  Expression* expr = parser.parse(buf, " ");
-  if (expr) {
-    cout << expr->evaluate() << endl;
+
+  while (buf[0]) {
+
+    Expression* expr = parser.parse(buf, " ");
+    if (expr) {
+      cout << expr->evaluate() << endl;
+    }
+
+    delete expr;
+    cin.getline(buf, buffSize);
   }
-
-  system("pause");
-  delete expr;
-
   return 0;
 }
