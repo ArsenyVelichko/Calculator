@@ -48,7 +48,10 @@ void ExpressionFactory::registerExpr(const wchar_t* dllName) {
   if (!hDll) { return; }
 
   infoFunc getInfo = (infoFunc)GetProcAddress(hDll, "getExpressionInfo");
-  if (!getInfo) { return; }
+  if (!getInfo) { 
+    FreeLibrary(hDll);
+    return;
+  }
 
   ExpressionInfo info;
   getInfo(info);
