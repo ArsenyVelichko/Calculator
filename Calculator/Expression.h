@@ -6,16 +6,27 @@ enum Precedence {
   MUL_PRECEDENCE = 0x2000,
 };
 
+enum class Notation {
+  INFIX,
+  PREFIX,
+  POSTFIX,
+};
+
+enum class Associativity {
+  LEFT_ASSOCIATIVE,
+  RIGHT_ASSOCIATIVE,
+};
+
 struct ExpressionDef {
   ExpressionDef() {
-    rightAssociative = false;
-    prefix = false;
+    associativity = Associativity::LEFT_ASSOCIATIVE;
+    notation = Notation::INFIX;
   }
 
   size_t precedence;
   size_t argNumber;
-  bool rightAssociative;
-  bool prefix;
+  Associativity associativity;
+  Notation notation;
 };
 
 class Expression {
@@ -29,12 +40,12 @@ public:
 
   size_t mPrecendence;
   size_t mArgNumber;
-  bool mRightAssociative;
-  bool mPrefix;
+  Associativity mAssociativity;
+  Notation mNotation;
 };
 
 inline Expression::Expression(const ExpressionDef& def)
   : mPrecendence(def.precedence),
     mArgNumber(def.argNumber),
-    mRightAssociative(def.rightAssociative),
-    mPrefix(def.prefix) {}
+    mAssociativity(def.associativity),
+    mNotation(def.notation) {}

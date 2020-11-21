@@ -8,7 +8,7 @@ struct PowerDef : ExpressionDef {
   PowerDef() {
     precedence = MUL_PRECEDENCE + 1;
     argNumber = 2;
-    rightAssociative = true;
+    associativity = Associativity::RIGHT_ASSOCIATIVE;
   }
 };
 

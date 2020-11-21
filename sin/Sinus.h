@@ -9,7 +9,7 @@ struct SinusDef : ExpressionDef {
   SinusDef() {
     precedence = MUL_PRECEDENCE + 2;
     argNumber = 1;
-    prefix = true;
+    notation = Notation::PREFIX;
   }
 };
 

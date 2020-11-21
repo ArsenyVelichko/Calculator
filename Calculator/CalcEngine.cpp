@@ -39,12 +39,13 @@ void CalcEngine::pushExpr(Expression* expr) {
     throw "Missing opening parentheses";
   }
 
-  if (expr->mPrecendence == NUM_PRECEDENCE) {
+  if (expr->mPrecendence == NUM_PRECEDENCE ||
+      expr->mNotation == Notation::POSTFIX) {
     mOutputStk.push(expr);
     return;
   }
 
-  if (expr->mPrefix) {
+  if (expr->mNotation == Notation::PREFIX) {
     mProcessStk.push(expr);
     return;
   }
@@ -53,7 +54,7 @@ void CalcEngine::pushExpr(Expression* expr) {
   while (topExpr && topExpr->mPrecendence >= expr->mPrecendence) {
 
     if (topExpr->mPrecendence == expr->mPrecendence &&
-        expr->mRightAssociative) {
+        expr->mAssociativity == Associativity::RIGHT_ASSOCIATIVE) {
       break;
     }
 
