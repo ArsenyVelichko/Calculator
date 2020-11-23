@@ -20,7 +20,7 @@ public:
 
   Expression* getExpression(const string& grammarToken) const;
   void registerExpr(const string& grammarToken, const Expression* prototype);
-  void registerExpr(const wchar_t* dllName);
+  void registerExpr(const wstring& dllName);
 
   static ExpressionFactory* createFromDll(const string& directory);
 

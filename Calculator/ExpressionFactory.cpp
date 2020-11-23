@@ -43,8 +43,8 @@ void ExpressionFactory::registerExpr(const string& grammarToken, const Expressio
   mRegister[grammarToken] = prototype;
 }
 
-void ExpressionFactory::registerExpr(const wchar_t* dllName) {
-  HINSTANCE hDll = LoadLibrary(dllName);
+void ExpressionFactory::registerExpr(const wstring& dllName) {
+  HINSTANCE hDll = LoadLibrary(dllName.c_str());
   if (!hDll) { return; }
 
   infoFunc getInfo = (infoFunc)GetProcAddress(hDll, "getExpressionInfo");
@@ -66,7 +66,7 @@ ExpressionFactory* ExpressionFactory::createFromDll(const string& directory) {
   for (auto& p : filesystem::directory_iterator(directory)) {
     if (p.path().extension() != ".dll") { continue; }
 
-    factory->registerExpr(p.path().c_str());
+    factory->registerExpr(p.path());
   }
   return factory;
 }

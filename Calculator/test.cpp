@@ -1,8 +1,6 @@
 ﻿#include <iostream>
 #include "ExpressionParser.h"
 
-constexpr size_t buffSize = 256;
-
 using namespace std;
 
 int main()
@@ -12,8 +10,8 @@ int main()
 
   cout << "Please, write spaces between tokens." << endl;
 
-  char buf[buffSize];
-  cin.getline(buf, buffSize);
+  string buf;
+  getline(cin, buf);
 
   while (buf[0]) {
 
@@ -23,7 +21,7 @@ int main()
     }
 
     delete expr;
-    cin.getline(buf, buffSize);
+    getline(cin, buf);
   }
   return 0;
 }
